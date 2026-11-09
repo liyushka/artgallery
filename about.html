@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Gallery - About</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">Art Gallery</a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Главная</a></li>
+        <li><a href="collection.html" data-i18n="nav_collection">Коллекция</a></li>
+        <li><a href="artists.html" data-i18n="nav_artists">Художники</a></li>
+        <li><a href="about.html" class="active" data-i18n="nav_about">О галерее</a></li>
+        <li><a href="saved.html" data-i18n="nav_saved">Избранное</a></li>
+      </ul>
+      <div class="controls">
+        <select id="lang-select" class="lang-select">
+          <option value="ru">RU</option>
+          <option value="en">EN</option>
+          <option value="uz">UZ</option>
+        </select>
+        <button id="theme-toggle" class="btn-control">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="about_title">О нашей галерее</h1>
+      <p class="page-subtitle" data-i18n="about_subtitle">Объединяем классическое искусство и современные технологии</p>
+    </div>
+
+    <section class="about-section">
+      <div class="about-text">
+        <h2 data-i18n="about_h1">Наша философия</h2>
+        <p data-i18n="about_p1">Art Gallery создана для чистого эстетического восприятия. Мы верим, что цифровое пространство должно передавать атмосферу настоящих музеев: строгие линии, идеальные отступы и отсутствие лишних деталей.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80" alt="Gallery Space">
+      </div>
+    </section>
+
+    <section class="about-section reverse">
+      <div class="about-text">
+        <h2 data-i18n="about_h2">Высокая культура</h2>
+        <p data-i18n="about_p2">Каждая картина сопровождена важной исторической информацией, открывая художникам и ценителям искусства легкий доступ к культурному достоянию.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1582561624796-7a1a0112dd18?auto=format&fit=crop&w=800&q=80" alt="Art Detail">
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span class="logo">Art Gallery</span>
+      <p data-i18n="footer_text">© 2026 Art Gallery. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

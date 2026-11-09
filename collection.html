@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Gallery - Collection</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">Art Gallery</a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Главная</a></li>
+        <li><a href="collection.html" class="active" data-i18n="nav_collection">Коллекция</a></li>
+        <li><a href="artists.html" data-i18n="nav_artists">Художники</a></li>
+        <li><a href="about.html" data-i18n="nav_about">О галерее</a></li>
+        <li><a href="saved.html" data-i18n="nav_saved">Избранное</a></li>
+      </ul>
+      <div class="controls">
+        <select id="lang-select" class="lang-select">
+          <option value="ru">RU</option>
+          <option value="en">EN</option>
+          <option value="uz">UZ</option>
+        </select>
+        <button id="theme-toggle" class="btn-control">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="collection_title">Коллекция картин</h1>
+      <p class="page-subtitle" data-i18n="collection_subtitle">Путешествие сквозь века художественной истории</p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-categories">
+        <button class="btn-filter active" data-category="all" data-i18n="btn_all">Все стили</button>
+        <button class="btn-filter" data-category="renaissance" data-i18n="btn_renaissance">Ренессанс</button>
+        <button class="btn-filter" data-category="impressionism" data-i18n="btn_impressionism">Импрессионизм</button>
+        <button class="btn-filter" data-category="modern" data-i18n="btn_modern">Модерн</button>
+        <button class="btn-filter" data-category="abstract" data-i18n="btn_abstract">Абстракционизм</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Поиск по названию или автору..." data-i18n-placeholder="search_placeholder">
+      </div>
+    </div>
+
+    <div id="collection-grid" class="grid-artworks"></div>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span class="logo">Art Gallery</span>
+      <p data-i18n="footer_text">© 2026 Art Gallery. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('collection-grid');
+      const filterBtns = document.querySelectorAll('.btn-filter');
+      const searchInput = document.getElementById('search-input');
+
+      let currentCategory = 'all';
+      let searchQuery = '';
+
+      function render() {
+        const filtered = artworksData.filter(art => {
+          const matchCat = currentCategory === 'all' || art.category === currentCategory;
+          const matchSearch = art.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              art.artist.toLowerCase().includes(searchQuery.toLowerCase());
+          return matchCat && matchSearch;
+        });
+
+        grid.innerHTML = filtered.map(createArtworkCard).join('');
+        attachHeartEvents(grid);
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.getAttribute('data-category');
+          render();
+        });
+      });
+
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        render();
+      });
+
+      render();
+    });
+  </script>
+</body>
+</html>

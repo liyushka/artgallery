@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Gallery - Saved</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">Art Gallery</a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Главная</a></li>
+        <li><a href="collection.html" data-i18n="nav_collection">Коллекция</a></li>
+        <li><a href="artists.html" data-i18n="nav_artists">Художники</a></li>
+        <li><a href="about.html" data-i18n="nav_about">О галерее</a></li>
+        <li><a href="saved.html" class="active" data-i18n="nav_saved">Избранное</a></li>
+      </ul>
+      <div class="controls">
+        <select id="lang-select" class="lang-select">
+          <option value="ru">RU</option>
+          <option value="en">EN</option>
+          <option value="uz">UZ</option>
+        </select>
+        <button id="theme-toggle" class="btn-control">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="saved_title">Сохранённые картины</h1>
+      <p class="page-subtitle" data-i18n="saved_subtitle">Ваша личная подборка избранных шедевров</p>
+    </div>
+
+    <div id="saved-grid" class="grid-artworks"></div>
+
+    <div id="saved-empty" class="empty-state" style="display: none;">
+      <h3 data-i18n="empty_saved_title">В избранном пока ничего нет</h3>
+      <p data-i18n="empty_saved_desc">Нажмите на иконку сердечка на карточке картины, чтобы добавить её сюда.</p>
+      <a href="collection.html" class="btn-primary" data-i18n="empty_btn">Перейти в коллекцию</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span class="logo">Art Gallery</span>
+      <p data-i18n="footer_text">© 2026 Art Gallery. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('saved-grid');
+      const favIds = getFavorites();
+      const savedArtworks = artworksData.filter(art => favIds.includes(art.id));
+
+      if (grid) {
+        grid.innerHTML = savedArtworks.map(createArtworkCard).join('');
+        attachHeartEvents(grid);
+      }
+
+      checkSavedEmptyState();
+    });
+  </script>
+</body>
+</html>

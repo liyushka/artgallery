@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Gallery - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">Art Gallery</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active" data-i18n="nav_home">Главная</a></li>
+        <li><a href="collection.html" data-i18n="nav_collection">Коллекция</a></li>
+        <li><a href="artists.html" data-i18n="nav_artists">Художники</a></li>
+        <li><a href="about.html" data-i18n="nav_about">О галерее</a></li>
+        <li><a href="saved.html" data-i18n="nav_saved">Избранное</a></li>
+      </ul>
+      <div class="controls">
+        <select id="lang-select" class="lang-select">
+          <option value="ru">RU</option>
+          <option value="en">EN</option>
+          <option value="uz">UZ</option>
+        </select>
+        <button id="theme-toggle" class="btn-control">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h1 data-i18n="hero_title">Откройте шедевры мирового искусства</h1>
+        <p data-i18n="hero_subtitle">Исследуйте коллекции произведений самых известных художников истории в виртуальном формате.</p>
+        <a href="collection.html" class="btn-primary" data-i18n="hero_btn">Смотреть коллекцию</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80" alt="Masterpiece">
+      </div>
+    </section>
+
+    <section>
+      <div class="page-header">
+        <h2 class="page-title" data-i18n="featured_title">Избранные картины</h2>
+        <p class="page-subtitle" data-i18n="featured_subtitle">Лучшие произведения из мирового наследия</p>
+      </div>
+      <div id="home-featured-grid" class="grid-artworks"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span class="logo">Art Gallery</span>
+      <p data-i18n="footer_text">© 2026 Art Gallery. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('home-featured-grid');
+      if (grid) {
+        const featured = artworksData.slice(0, 3);
+        grid.innerHTML = featured.map(createArtworkCard).join('');
+        attachHeartEvents(grid);
+      }
+    });
+  </script>
+</body>
+</html>
